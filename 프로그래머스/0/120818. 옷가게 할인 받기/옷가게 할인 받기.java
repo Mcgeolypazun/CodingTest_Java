@@ -1,19 +1,17 @@
 class Solution {
     public int solution(int price) {
+        int answer = price;
         
-        double discountedPrice;
-        
-        
-        if (price >= 500000) {
-            discountedPrice = price * 0.8;
-        } else if (price >= 300000) {
-            discountedPrice = price * 0.9; 
-        } else if (price >= 100000) {
-            discountedPrice = price * 0.95; 
-        } else {
-            discountedPrice = price; 
+        if(price >= 100_000){
+            answer = (int)((double)price * 0.95);
+            if(price >= 300_000){
+                answer = (int)((double)price * 0.90);
+            }
+            if(price >= 500_000){
+                answer = (int)((double)price * 0.80);
+            }
         }
         
-        return (int)discountedPrice;
+        return answer;
     }
 }
