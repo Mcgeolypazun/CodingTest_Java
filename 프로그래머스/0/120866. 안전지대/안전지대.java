@@ -14,21 +14,7 @@ class Solution {
             }
             System.out.println();
         }
-        
-        //출력
-        System.out.print(" ");
-        for(int i=0;i<br_len;i++){
-            System.out.print(" "+i);
-        }System.out.println();
-        for(int i=0;i<br_len;i++){
-            System.out.print(i+" ");
-            for(int j=0;j<br_len;j++){
-                
-               
-                System.out.print(broad[i][j]+" ");
-            }
-            System.out.println();
-        }
+       
         
         for(int i=0;i<br_len;i++){
             for(int j=0;j<br_len;j++){
@@ -51,28 +37,13 @@ class Solution {
         for(int i=1;i<br_len-1;i++){
             
             for(int j=1;j<br_len-1;j++){
-                System.out.print(broad[i][j]);
                 if(broad[i][j] == 0){
                     answer++;
                 }
             }
-            System.out.println();
             
         }
-        //출력
-        System.out.print(" ");
-        for(int i=0;i<br_len;i++){
-            System.out.print(" "+i);
-        }System.out.println();
-        for(int i=0;i<br_len;i++){
-            System.out.print(i+" ");
-            for(int j=0;j<br_len;j++){
-                
-               
-                System.out.print(broad[i][j]+" ");
-            }
-            System.out.println();
-        }
+        
         
         return answer;
     }
