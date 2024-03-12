@@ -15,11 +15,11 @@ class Solution {
                  a = terms[i].substring(0,1).trim();
                  b = terms[i].substring(1,3).trim();
             }
-            else if(terms[i].length() == 4){//"B 100" 01234
+            else if(terms[i].length() == 4){
                  a = terms[i].substring(0,1).trim();
                  b = terms[i].substring(1,4).trim();
             }
-            else if(terms[i].length() == 5){
+            else if(terms[i].length() == 5){//"B 100" 01234
                 a = terms[i].substring(0,1).trim();
                 b = terms[i].substring(1,5).trim();
             }
