@@ -1,15 +1,12 @@
 import java.math.BigInteger;
 
 class Solution {
-    public BigInteger solution(int balls, int share) {
-        BigInteger numerator = BigInteger.ONE;
-        BigInteger denominator = BigInteger.ONE;
+    public double solution(int balls, int share) { 
+        double answer = 1;
 
-        for (int i = 1; i <= share; i++) {
-            numerator = numerator.multiply(BigInteger.valueOf(balls - (i - 1)));
-            denominator = denominator.multiply(BigInteger.valueOf(i));
-        }
-
-        return numerator.divide(denominator);
+        for(int i = 0; i < share; i++){
+            answer = answer * (balls - i) / (i+1);
+        }        
+        return answer;
     }
 }
