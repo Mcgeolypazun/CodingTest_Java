@@ -9,14 +9,11 @@ class Solution {
             }
         }
         
-        for(int i=0;i<arr.length;i++){
+        for(int i=0;i<arr.length-1;i++){
             int idx = i;
-            int min = arr[i];
+            
             for(int j=i+1;j<arr.length;j++){
-                if(min > arr[j]){
-                    idx = j;
-                    min = arr[j];
-                }
+                if(arr[j]<arr[idx]) idx = j;
             }
             char tmp = arr[idx];
             arr[idx] = arr[i];
