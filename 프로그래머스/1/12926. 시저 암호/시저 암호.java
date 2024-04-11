@@ -10,12 +10,12 @@ class Solution {
             else{
                 char cur =(char)(s.charAt(i) + n);
                 
-                if(s.charAt(i) >= 65 && s.charAt(i) <=90){
+                if(Character.isUpperCase(s.charAt(i))){
                     if(cur > 90){
                         cur -= 26;
                     }
                 }
-                else if(s.charAt(i) >= 97 && s.charAt(i) <=122){
+                else if(Character.isLowerCase(s.charAt(i))){
                     if(cur > 122){
                         cur -= 26;
                     }
