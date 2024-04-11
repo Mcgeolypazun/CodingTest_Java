@@ -1,23 +1,29 @@
 class Solution {
     public String solution(String s, int n) {
         String answer = "";
-        char charArr[] = s.toCharArray();
-
+        
         for(int i=0;i<s.length();i++){
-            if(charArr[i] == 32){
+            if(s.charAt(i) == 32){
+                answer += String.valueOf(s.charAt(i));
                 continue;
             }
-            for(int j=0;j<n;j++) {
-                charArr[i] = (char) (charArr[i] + 1);
-                if(charArr[i] == 'z'+1){
-                    charArr[i] = 'a';
+            else{
+                char cur =(char)(s.charAt(i) + n);
+                
+                if(s.charAt(i) >= 65 && s.charAt(i) <=90){
+                    if(cur > 90){
+                        cur -= 26;
+                    }
                 }
-                else if(charArr[i] == 'Z'+1){
-                    charArr[i] = 'A';
+                else if(s.charAt(i) >= 97 && s.charAt(i) <=122){
+                    if(cur > 122){
+                        cur -= 26;
+                    }
                 }
+                answer += String.valueOf(cur);
             }
         }
-        answer = String.valueOf(charArr);
+        
         return answer;
     }
 }
