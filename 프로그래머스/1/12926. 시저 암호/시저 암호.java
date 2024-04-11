@@ -8,17 +8,15 @@ class Solution {
                 continue;
             }
             else{
-                char cur =(char)(s.charAt(i) + n);
+                char cur = ' ';
+                n = n%26;
                 
                 if(Character.isUpperCase(s.charAt(i))){
-                    if(cur > 90){
-                        cur -= 26;
-                    }
+                    cur = (char)((s.charAt(i) - 'A' + n) % 26 + 'A' );
+                    
                 }
                 else if(Character.isLowerCase(s.charAt(i))){
-                    if(cur > 122){
-                        cur -= 26;
-                    }
+                    cur = (char)((s.charAt(i) - 'a' +n) %26 + 'a');
                 }
                 answer += String.valueOf(cur);
             }
