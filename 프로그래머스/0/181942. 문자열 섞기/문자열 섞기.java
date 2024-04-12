@@ -5,10 +5,10 @@ class Solution {
         int index = 0;
         for(int i=0;i<length;i++){
             if(i % 2 == 0){
-                answer += String.valueOf(str1.charAt(index));
+                answer += str1.charAt(index);
             }
             else{
-                answer += String.valueOf(str2.charAt(index));
+                answer += str2.charAt(index);
                 index++;
             }
         }
