@@ -1,24 +1,27 @@
 import java.util.*;
 class Solution {
-    public int solution(int[] arr) {
-        int answer = 0;
-        Arrays.sort(arr);
-        for(int i=1;i<arr.length-1;i++){
-            int next = arr[i+1];
-            answer = arr[i];
-            while(true){
-                if(answer == next){
-                    arr[i] = answer;
-                    arr[i+1] = next;
-                    break;
-                }else if(answer > next){
-                    next += arr[i+1];
-                }else if(answer < next){
-                    answer += arr[i];
-                }
-            }
-            
+    
+    public int findLCM(int[] arr){
+        int lcm = 1;
+        for(int i=0;i<arr.length;i++){
+            lcm = (lcm * arr[i])/GCD(lcm,arr[i]);
         }
+        
+        return lcm;
+    }
+    
+    public int GCD(int a,int b){
+        while(b != 0){
+            int tmp = a % b;
+            a = b;
+            b = tmp;
+        }
+        
+        return a;
+    }
+    
+    public int solution(int[] arr) {
+        int answer = findLCM(arr);
         
         return answer;
     }
