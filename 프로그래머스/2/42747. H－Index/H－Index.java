@@ -1,10 +1,9 @@
 class Solution {
     public int solution(int[] citations) {
         int answer = 0;
-        
         int max = 0;
-        
         int maxLen = -1;
+        
         for(int cur : citations){
             if(maxLen < cur){
                 maxLen = cur;
