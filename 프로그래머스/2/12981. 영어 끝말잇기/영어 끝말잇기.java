@@ -1,8 +1,8 @@
-import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 class Solution {
     public int[] solution(int n, String[] words) {
         int[] answer = new int[2];
-        Map<String,Integer> map = new HashMap<>();
+        ConcurrentHashMap<String,Integer> map = new ConcurrentHashMap<>();
         int count = 1;
         int Human = 1;
         
