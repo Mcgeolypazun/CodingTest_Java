@@ -8,12 +8,13 @@ class Solution {
             link.add(arr[i]);
         }
         
-        for(int i=0;i<queries.length;i++){
+        for(int q[] : queries){
+            int i = q[0];
+            int j = q[1];
             
-            int tmp = link.get(queries[i][0]);
-            link.set(queries[i][0],link.get(queries[i][1]));
-            link.set(queries[i][1],tmp);
-            
+            int tmp = link.get(i);
+            link.set(i,link.get(j));
+            link.set(j,tmp);
         }
         
         for(int i=0;i<arr.length;i++){
