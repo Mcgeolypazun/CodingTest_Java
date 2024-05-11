@@ -1,23 +1,36 @@
+import java.util.Arrays;
+
 class Solution {
-    int[][] arr;
-    int DFS(int[][] triangle,int level,int horizon){
-        if(arr[level][horizon] != 0){
-            return arr[level][horizon];
-        }
-        else if(level == triangle.length-1){
-            return arr[level][horizon] = triangle[level][horizon];
+    public int solution(int[][] triangle) {
+        int height = triangle.length;
+        int[][] dp = new int[height][height];
+        
+        // dp 배열 초기화
+        for (int i = 0; i < height; i++) {
+            Arrays.fill(dp[i], -1);
         }
         
-        
-        int a = DFS(triangle,level+1,horizon);
-        int b = DFS(triangle,level+1,horizon+1);
-        arr[level][horizon] = Math.max(a,b) + triangle[level][horizon];
-        return arr[level][horizon];
+        return findMaxPath(triangle, 0, 0, dp);
     }
     
-    public int solution(int[][] triangle) {
-        arr = new int[triangle.length][triangle.length];
-        int answer = DFS(triangle,0,0);
-        return answer;
+    private int findMaxPath(int[][] triangle, int row, int col, int[][] dp) {
+        // 기저 조건: 삼각형의 아랫부분에 도달했을 때
+        if (row == triangle.length - 1) {
+            return triangle[row][col];
+        }
+        
+        // 이미 계산된 값이 있다면 그 값을 반환
+        if (dp[row][col] != -1) {
+            return dp[row][col];
+        }
+        
+        // 현재 위치에서 아래층으로 내려가는 경우 중 최댓값을 선택
+        int leftMax = findMaxPath(triangle, row + 1, col, dp);
+        int rightMax = findMaxPath(triangle, row + 1, col + 1, dp);
+        
+        // 현재 위치까지의 최댓값을 현재 셀에 저장
+        dp[row][col] = Math.max(leftMax, rightMax) + triangle[row][col];
+        
+        return dp[row][col];
     }
 }
