@@ -1,14 +1,8 @@
+import java.util.stream.*;
 class Solution {
     public int solution(int[] num_list) {
-        int answer = 0;
-        
-        for(int num : num_list){
-            if(num < 0){
-                return answer;
-            }
-            answer++;
-        }
-        
-        return answer = -1;
+        int answer = IntStream.range(0,num_list.length).filter(i -> num_list[i] < 0).findFirst().orElse(-1);
+        return answer;
     }
 }
+
