@@ -3,20 +3,9 @@ class Solution {
     public int[] solution(int[] num_list, int n) {
         int[] answer = new int[num_list.length];
         
-        int idx = 0;
-        for(int i=n;i<num_list.length;i++){
-            if(idx == num_list.length){
-                break;
-            }
-            answer[idx++] = num_list[i];
-            if(i == num_list.length - 1){
-                i = -1;
-            }
-            
-        }
-        if(idx == 0){
-            return num_list;
-        }
+        System.arraycopy(num_list,n,answer,0,num_list.length - n);
+        System.arraycopy(num_list,0,answer,num_list.length - n,n);
+        
         
         return answer;
     }
