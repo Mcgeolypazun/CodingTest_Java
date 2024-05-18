@@ -1,23 +1,15 @@
 class Solution {
     public int solution(int n) {
-        int f = 1;
-        int cur = f;
-        int sum = 1;
-        
+        int fac = 1;
+        int i = 0;
+
         while(true){
-            sum *= cur--;
-            if(cur == 1){
-                if(sum > n){
-                    return f-1;
-                }
-                else if(sum == n){
-                    return f;
-                }
-                f++;
-                cur = f;
-                sum = 1;
-            }
+            if(fac <= n){
+                fac *= i + 1;
+                i++;
+            }else break;
         }
-        
+
+        return i-1;
     }
 }
