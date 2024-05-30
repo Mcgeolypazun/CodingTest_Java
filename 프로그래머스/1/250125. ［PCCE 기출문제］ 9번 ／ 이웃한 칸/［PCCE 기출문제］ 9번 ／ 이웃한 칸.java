@@ -1,19 +1,24 @@
 class Solution {
     public int solution(String[][] board, int h, int w) {
-        int n = board.length;
-        int cnt = 0;
-        int[] dh = new int[]{0,1,-1,0};
-        int[] dw = new int[]{1,0,0,-1};
+        int answer = 0;
         
-        for(int i=0;i<=3;i++){
-            int h_check = h + dh[i];
-            int w_check = w + dw[i];
-            
-            if((h_check >= 0 && h_check < n) && (w_check >= 0 && w_check < n)){
-                if(board[h][w].equals(board[h_check][w_check])) cnt++;
+        for(int i=0;i<board.length;i++){
+            for(int j=0;j<board[i].length;j++){
+                if(board[h][w].equals(board[i][j])){
+                    if(Math.abs(i - h) == 1){
+                        if(Math.abs(j - w) < 1){
+                            answer++;
+                        }
+                    }
+                    else if(Math.abs(j - w) == 1){
+                        if(Math.abs(i - h) < 1){
+                            answer++;
+                        }
+                    }
+                
+                }
             }
         }
-        
-        return cnt;
+        return answer;
     }
 }
