@@ -1,13 +1,21 @@
 class Solution {
-    public int solution(String[] babbling) {
+    public int solution(String[] babblings) {
+        // "aya", "ye", "woo", "ma" 4가지 발음만 가능
         int answer = 0;
-        
-        for(String baby : babbling){
-            String str = baby.replaceAll("aya(?!aya)|ye(?!ye)|woo(?!woo)|ma(?!ma)","*");
-            String str2 = str.replaceAll("[a-z]","-");
-            if(!str2.contains("-") && str2.contains("*")) answer++;
+        for(int i = 0; i < babblings.length; i++) {
+            if(babblings[i].contains("ayaaya") || babblings[i].contains("yeye") || babblings[i].contains("woowoo") || babblings[i].contains("mama")) {
+                continue;
+            }
+
+            babblings[i] = babblings[i].replace("aya", " ");
+            babblings[i] = babblings[i].replace("ye", " ");
+            babblings[i] = babblings[i].replace("woo", " ");
+            babblings[i] = babblings[i].replace("ma", " ");
+            babblings[i] = babblings[i].replace(" ", "");
+
+            if(babblings[i].length()  == 0) answer++;
+
         }
-        
         return answer;
     }
 }
