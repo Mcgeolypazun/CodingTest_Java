@@ -1,88 +1,27 @@
 class Solution {
     public int[][] solution(int n) {
         int[][] answer = new int[n][n];
-        char[] c = new char[]{'d','s','a','w'};
-        int w = 0;
-        int h = 0;
-        int idx = 0;
-        int cur = 1;
-        
-        if(n == 1){
-            return new int[][]{{1}};
+        int num = 1;
+        int x = 0, y = 0;
+        int dx[] = {0, 1, 0, -1};
+        int dy[] = {1, 0, -1, 0};
+        int direction = 0;
+
+        while (num <= n * n) {
+            answer[x][y] = num++;
+
+            int nx = x + dx[direction]; 
+            int ny = y + dy[direction];
+
+            if (nx < 0 || nx >= n || ny < 0 || ny >= n || answer[nx][ny] != 0) {
+                direction = (direction + 1) % 4; //범위 밖에 나갔을 때 방향전환
+                nx = x + dx[direction];
+                ny = y + dy[direction];
+            }
+            x = nx;
+            y = ny;
         }
-        
-        while(true){
-            
-            
-            if(c[idx] == 'd'){
-                answer[h][w] = cur;
-                cur++;
-                w++;
-            }
-            else if(c[idx] == 's'){
-                answer[h][w] = cur;
-                cur++;
-                h++;
-            }
-            else if(c[idx] == 'a'){
-                answer[h][w] = cur;
-                cur++;
-                w--;
-            }
-            else if(c[idx] == 'w'){
-                answer[h][w] = cur;
-                cur++;
-                h--;
-            }
-            
-            if(h < 0){
-                h++;
-                w++;
-                idx++;
-            }
-            else if(h == n){
-                h--;
-                w--;
-                idx++;
-            }
-            else if(w < 0){
-                w++;
-                h--;
-                idx++;
-            }
-            else if(w == n){
-                w--;
-                h++;
-                idx++;
-            }
-            else if(answer[h][w] != 0){
-                if(c[idx] == 'd'){
-                    h++;
-                    w--;
-                    idx++;
-                }
-                else if(c[idx] == 'a'){
-                    idx++;
-                    w++;
-                    h--;
-                }
-                else if(c[idx] == 'w'){
-                    idx++;
-                    h++;
-                    w++;
-                }
-                else if(c[idx] == 's'){
-                    idx++;
-                    h--;
-                    w--;
-                }
-            }
-            if(idx == 4) idx = 0;
-            
-            if(answer[h][w] != 0) break;
-        }
-        
-        
+
         return answer;
     }
 }
