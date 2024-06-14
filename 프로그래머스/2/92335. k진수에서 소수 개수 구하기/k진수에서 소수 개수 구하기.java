@@ -6,12 +6,9 @@ class Solution {
         if(str.length() == 0) return false;
         long intstr = Long.parseLong(str);
         if(intstr < 2) return false;
-        if(intstr > Integer.MAX_VALUE){
-            BigInteger bigInt = new BigInteger(str);
-            return bigInt.isProbablePrime(20);
-        } 
         
-        for(long i=2;i<=intstr/2;i++){
+        
+        for(long i=2;i<=Math.sqrt(intstr);i++){
             
             if(intstr % i == 0) return false;
         }
