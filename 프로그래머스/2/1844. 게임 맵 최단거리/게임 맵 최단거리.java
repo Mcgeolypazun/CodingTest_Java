@@ -1,48 +1,81 @@
 import java.util.*;
 
 class Solution {
-    static boolean[][] visited;
+//     int BFS(int[][] maps) {
+//         Queue<ArrayList<Integer>> q = new LinkedList<>();
+//         int lv = 1;
+//         int[] row = new int[]{-1, 1, 0, 0};
+//         int[] col = new int[]{0, 0, 1, -1};
+//         int destinRow = maps.length - 1;
+//         int destinCol = maps[0].length - 1;
+//         boolean[][] visited = new boolean[destinRow + 1][destinCol + 1];
+        
+//         ArrayList<Integer> listOut = new ArrayList<>(Arrays.asList(0, 0));
+//         q.add(listOut);
+        
+//         while (!q.isEmpty()) {
+//             ArrayList<Integer> listIn = q.poll();
+//             for (int j = 0; j < row.length; j++) {
+//                 int x = row[j] + listIn.get(0);
+//                 int y = col[j] + listIn.get(1);
+                
+//                 if (x == destinRow && y == destinCol) {
+//                     return lv + 1;
+//                 }
+                
+//                 if (x >= 0 && y >= 0 && x <= destinRow && y <= destinCol && maps[x][y] == 1 && !visited[x][y]) {
+//                     ArrayList<Integer> pathList = new ArrayList<>(Arrays.asList(x, y));
+//                     q.add(pathList);
+//                     visited[x][y] = true;
+//                 }
+//             }
+//             lv++;
+//         }
+        
+//         return -1;
+//     }
     
-    static int BFS(int[][] maps,int[] dx,int[] dy,int maxRow,int maxLen) {
-        
-        Queue<int[]> q = new LinkedList<>();
-        q.add(new int[]{0, 0, 1});
+//     public int solution(int[][] maps) {
+//         return BFS(maps);
+//     }
+    
+    int BFS(int[][] maps) {
+        Queue<ArrayList<Integer>> q = new LinkedList<>();
+
+        int[] row = new int[]{-1, 1, 0, 0};
+        int[] col = new int[]{0, 0, -1, 1};
+        int destinRow = maps.length;
+        int destinCol = maps[0].length;
+        boolean[][] visited = new boolean[destinRow][destinCol];
+
+        ArrayList<Integer> listOut = new ArrayList<>(Arrays.asList(0, 0, 1));
+        q.add(listOut);
         visited[0][0] = true;
-        
+
         while (!q.isEmpty()) {
-            int[] current = q.poll();
-            int x = current[0];
-            int y = current[1];
-            int distance = current[2];
-            
-            if (x == maxRow - 1 && y == maxLen - 1) {
-                return distance;
-            }
-            
-            for (int i = 0; i < 4; i++) {
-                int nx = x + dx[i];
-                int ny = y + dy[i];
-                
-                
-                if (nx >= 0 && ny >= 0 && nx < maxRow && ny < maxLen && maps[nx][ny] == 1 && !visited[nx][ny]) {
-                    visited[nx][ny] = true;
-                    q.add(new int[]{nx, ny, distance + 1});
+            ArrayList<Integer> listIn = q.poll();
+            for (int j = 0; j < 4; j++) {
+                int x = row[j] + listIn.get(0);
+                int y = col[j] + listIn.get(1);
+                int lv = listIn.get(2);
+
+                if (x == destinRow-1 && y == destinCol-1) {
+                    return lv+1;
+                }
+
+                if (x >= 0 && y >= 0 && x < destinRow && y < destinCol && maps[x][y] == 1 && !visited[x][y]) {
+                    visited[x][y] = true;
+                    ArrayList<Integer> pathList = new ArrayList<>(Arrays.asList(x, y, lv+1));
+                    q.add(pathList);
+
                 }
             }
         }
-        
+
         return -1;
     }
 
     public int solution(int[][] maps) {
-        int[] dx = {-1, 1, 0, 0};
-        int[] dy = {0, 0, -1, 1};
-        
-        int maxRow = maps.length;
-        int maxLen = maps[0].length;
-        visited = new boolean[maxRow][maxLen];
-        
-        return BFS(maps,dx,dy,maxRow,maxLen);
+        return BFS(maps);
     }
-    
 }
