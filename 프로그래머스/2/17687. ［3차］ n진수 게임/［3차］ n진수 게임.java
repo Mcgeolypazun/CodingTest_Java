@@ -7,10 +7,7 @@ class Solution {
         while(loop != num){
             String changeableNum = Integer.toString(curNum++,n);
             for(int i=0;i<changeableNum.length();i++){
-                if(loop != 0 && loop % (m)-p+1 == 0){
-                    result.append(changeableNum.toUpperCase().charAt(i));
-                }
-                else if(loop == p-1){
+                if(loop % m == p-1){
                     result.append(changeableNum.toUpperCase().charAt(i));
                 }
                 loop++;
