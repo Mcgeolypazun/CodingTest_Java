@@ -1,54 +1,79 @@
 import java.util.*;
-
 class Solution {
-    public int solution(String begin, String target, String[] words) {
-        if (!Arrays.asList(words).contains(target)) {
-            return 0;
-        }
-
-        Queue<WordNode> queue = new LinkedList<>();
-        queue.add(new WordNode(begin, 0));
-
-        boolean[] visited = new boolean[words.length];
-
-        while (!queue.isEmpty()) {
-            WordNode current = queue.poll();
-
-            if (current.word.equals(target)) {
-                return current.steps;
+    static int min = Integer.MAX_VALUE;
+    Queue<ArrayList<Integer>> q = new LinkedList<>();
+    
+    public void DFS(String begin, String target, String[] words,int cnt,String[] copy){
+        if(min < cnt) return ;
+        if(begin.equals(target)){
+            cnt--;
+            if(min > cnt){
+                min = cnt;
             }
-
-            for (int i = 0; i < words.length; i++) {
-                if (!visited[i] && canTransform(current.word, words[i])) {
-                    visited[i] = true;
-                    queue.add(new WordNode(words[i], current.steps + 1));
+            return ;
+        }
+        
+        for(int i=0;i<copy.length;i++){
+            String[] copyWords = Arrays.copyOf(copy,copy.length);
+            copyWords[i] = "-";
+            if(copy[i].equals("-")) continue;
+            String word = copy[i];
+            int wordCnt = 0;
+            
+            for(int j=0;j<word.length();j++){
+                char cWord = word.charAt(j);
+                char cBegin = begin.charAt(j);
+                
+                if(cWord == cBegin) wordCnt++;
+                
+                if(wordCnt == word.length()-1){
+                    DFS(word,target,words,cnt+1,copyWords);
                 }
             }
         }
-
-        return 0;
+        
+//         for(int i=0;i<copy.length;i++){
+//             if(copy[i].equals("-")) continue;
+//             for(int j=i+1;j<copy.length;j++){
+//                 String copyWords[] = Arrays.copyOf(copy,copy.length);
+//                 copyWords[j] = "-";
+//                 String word = copy[j];
+//                 int cntWord = 0;
+//                 for(int k=0;k<word.length();k++){
+//                     char cWord = word.charAt(k);
+//                     char cBegin = begin.charAt(k);
+                    
+//                     if(cWord == cBegin) cntWord++;
+                    
+//                     if(cntWord == word.length()-1){
+//                         DFS(word,target,words,cnt+1,copyWords);
+//                     }
+//                 }
+//             }
+//             for(int j=0;j<i;j++){
+//                 String copyWords[] = Arrays.copyOf(copy,copy.length);
+//                 copyWords[j] = "-";
+//                 String word = copy[j];
+//                 int cntWord = 0;
+//                 for(int k=0;k<word.length();k++){
+//                     char cWord = word.charAt(k);
+//                     char cBegin = begin.charAt(k);
+                    
+//                     if(cWord == cBegin) cntWord++;
+                    
+//                     if(cntWord == word.length()-1){
+//                         DFS(word,target,words,cnt+1,copyWords);
+//                     }
+//                 }
+//             }
+//         }
+        
+        
     }
-
-    private boolean canTransform(String word1, String word2) {
-        int diffCount = 0;
-
-        for (int i = 0; i < word1.length(); i++) {
-            if (word1.charAt(i) != word2.charAt(i)) {
-                diffCount++;
-            }
-        }
-
-        return diffCount == 1;
+    
+    public int solution(String begin, String target, String[] words) {
+        DFS(begin,target,words,1,words);
+        if(min == Integer.MAX_VALUE) return 0;
+        return min;
     }
-
-    class WordNode {
-        String word;
-        int steps;
-
-        WordNode(String word, int steps) {
-            this.word = word;
-            this.steps = steps;
-        }
-    }
-
 }
