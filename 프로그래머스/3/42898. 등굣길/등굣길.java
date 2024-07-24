@@ -17,8 +17,9 @@ class Solution {
                     mn[i][j] = 0;
                 }
                 else{
-                    if(j > 0) mn[i][j] += mn[i][j-1] % 1_000_000_007;
                     if(i > 0) mn[i][j] += mn[i-1][j] % 1_000_000_007;
+                    if(j > 0) mn[i][j] += mn[i][j-1] % 1_000_000_007;
+                    
                 }
             }
         }
