@@ -1,29 +1,46 @@
+import java.util.*;
 class Solution {
-    int N, min;
-    int[][] map;
-    int[] vst;
-    int dfs(int n){
-        vst[n] = 1;
-        int child = 1;
-        for(int i = 1; i <= N; i++) {
-            if(vst[i] == 0 && map[n][i] == 1) {
-                vst[i] = 1;
-                child += dfs(i);
+    public static Map<Integer,ArrayList<Integer>> map = new HashMap<>();
+    static int count = 0;
+    void DFS(int cnt,int one,int two,boolean flag) {
+        count += 1;
+        for(int i=0;i<map.get(one).size();i++) {
+            if (map.get(one).get(i) == two && flag) {
+                flag = false;
+                continue;
             }
+            DFS(cnt + 1, map.get(one).get(i), one, true);
         }
-        min = Math.min(min, Math.abs(child - (N - child)));
-        return child;
     }
+
     public int solution(int n, int[][] wires) {
-        N = n;
-        min = n;
-        map = new int[n+1][n+1];
-        vst = new int[n+1];
-        for(int[] wire : wires) {
-            int a = wire[0], b = wire[1];
-            map[a][b] = map[b][a] = 1;
+        int answer = 101;
+
+        for(int wire[] : wires) {
+            int a = wire[0];
+            int b = wire[1];
+            if(!map.containsKey(a)) {
+                map.put(a,new ArrayList<>());
+            }
+            if(!map.containsKey(b)) {
+                map.put(b,new ArrayList<>());
+            }
+            map.get(a).add(b);
+            map.get(b).add(a);
         }
-        dfs(1);
-        return min;
+
+        for(int wire[] : wires) {
+            DFS(1, wire[0],wire[1],true);
+            int wireOne = count;
+            count = 0;
+            DFS(1, wire[1],wire[0],true);
+            int wireTwo = count;
+            count = 0;
+            answer = Math.min(answer, Math.abs(wireOne - wireTwo));
+
+        }
+
+
+        return answer;
     }
 }
