@@ -1,18 +1,3 @@
 -- 코드를 입력하세요
-SELECT COUNT(*) 
-FROM
-(
-    SELECT NAME
-    FROM ANIMAL_INS
-    WHERE NAME IS NOT NULL
-    GROUP BY NAME
-) AS UNIQUE_NAME;
-
-# SELECT COUNT(*) AS count
-# FROM 
-# (
-#     SELECT NAME
-#     FROM ANIMAL_INS
-#     WHERE NAME IS NOT NULL
-#     GROUP BY NAME
-# ) AS UNIQUE_NAME;
+select count(distinct(name)) from animal_ins
+where name is not null;
