@@ -1,3 +1,3 @@
 -- 코드를 입력하세요
 SELECT count(*) as USERS from user_info
-where left(joined,4) = 2021 and age >= 20 and age <= 29;
+where YEAR(JOINED) = 2021 and age between 20 and 29;
